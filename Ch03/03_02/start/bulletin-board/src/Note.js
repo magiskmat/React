@@ -1,32 +1,53 @@
 import React, { Component } from 'react'
 import { FaPencilAlt } from 'react-icons/fa';
 import { FaTrashAlt } from 'react-icons/fa';
-
-
+import { FaRegSave} from 'react-icons/fa';
 class Note extends Component {
     constructor(props) {
         super(props)
-        this.edit = this.edit.bind(this)
-        this.remove = this.remove.bind(this)
-
-    }
+        this.state = {
+            editing : false
+        }
+            this.edit = this.edit.bind(this)
+            this.remove = this.remove.bind(this)
+            this.save = this.save.bind(this)
+            this.renderForm = this.renderForm.bind(this)
+            this.renderDisplay = this.renderDisplay.bind(this)
+        }
     edit() {
-        alert("editing note")
+        this.setState({
+            editing: true
+        })
     }
     remove() {
-        alert("remove note")
+        alert('removing note')
     }
-        render() {
-            return (
+    save() {
+        alert(this._newText.value)
+    }
+    renderForm() {
+        return (
+            <div className="Note">
+            <form>
+                <textarea ref={input => this._newText = input} />
+                <button onClick={this.save}><FaRegSave /> </button>
+                </form>
+                </div>
+        )
+    }
+    renderDisplay() {
+        return (
             <div className="note">
-                <p>Learn React</p>
+                <p>{this.props.children}</p>
                 <span>
-                    <button onClick={this.edit}id="edit"><FaPencilAlt /></button>
-                    <button onClick={this.remove}id="remove"><FaTrashAlt /></button>
+                    <button onClick={this.edit} id="edit"><FaPencilAlt /></button>
+                    <button onClick={this.remove} id="remove"><FaTrashAlt /></button>
                     </span>
                   </div>
         )
     }
+    render() {
+        return this.state.editing ? this.renderForm() : this.renderDisplay()
+    }
 }
-
 export default Note
