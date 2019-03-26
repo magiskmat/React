@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FaPencilAlt } from 'react-icons/fa';
 import { FaTrashAlt } from 'react-icons/fa';
-import { FaRegSave} from 'react-icons/fa';
+
 
 class Note extends Component {
     constructor(props) {
